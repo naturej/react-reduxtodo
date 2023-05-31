@@ -1,6 +1,6 @@
 {
-  "homepage": "https://naturej.github.io/react-hooktodo",
-  "name": "hooktodo",
+  "homepage": "https://naturej.github.io/react-reduxtodo",
+  "name": "reduxtodo",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
