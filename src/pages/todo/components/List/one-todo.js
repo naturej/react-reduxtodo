@@ -4,15 +4,10 @@ import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faPen, faBan } from "@fortawesome/free-solid-svg-icons";
 import { flexAlignCenter, flexCenter } from "@styles/common";
-import {
-  COMPLETE_TODO,
-  DELETE_TODO,
-  UPDATE_TODO,
-  useTodoStore,
-} from "context/todo";
+import { useDispatch } from "react-redux";
 
 const OneTodo = ({ todo }) => {
-  const [todoList, dispatch] = useTodoStore();
+  const dispatch = useDispatch();
   const { id, state, title, content } = todo;
   const [isEditMode, setIsEditMode] = useState(false);
 
@@ -24,20 +19,33 @@ const OneTodo = ({ todo }) => {
     if (!isEditMode) return setIsEditMode(true);
     const editTitle = e.target.title.value;
     const editContent = e.target.content.value;
-    dispatch(UPDATE_TODO({ id: id, title: editTitle, content: editContent }));
+    dispatch({
+      type: "UPDATE_TODO",
+      payload: {
+        id: id,
+        title: editTitle,
+        content: editContent,
+      },
+    });
     setIsEditMode(false);
   };
 
   // 삭제
   const handleTodoDelete = () => {
     if (window.confirm("정말 삭제하시겠습니까?")) {
-      dispatch(DELETE_TODO(id));
+      dispatch({
+        type: "DELETE_TODO",
+        payload: id,
+      });
     }
   };
 
   // 완료
   const handleTodoComplete = () => {
-    dispatch(COMPLETE_TODO(id));
+    dispatch({
+      type: "COMPLETE_TODO",
+      payload: id,
+    });
   };
 
   return (

@@ -5,17 +5,18 @@ import theme, { toastOption } from "./styles/theme";
 import GlobalStyles from "./styles/global";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import TodoStoreProvider from "context/todo";
+import { Provider } from "react-redux";
+import { store } from "store/store";
 
 function App() {
   return (
-    <TodoStoreProvider>
+    <Provider store={store}>
       <ThemeProvider theme={theme}>
         <GlobalStyles />
         <RouterProvider router={router} />
         <ToastContainer {...toastOption} />
       </ThemeProvider>
-    </TodoStoreProvider>
+    </Provider>
   );
 }
 
